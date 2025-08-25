@@ -2,42 +2,24 @@
 #include <iomanip>
 #include "PhoneBook.hpp"
 
-void get_contact(PhoneBook& pb)
-{
-    Contact new_contact;
-    
-    std::cout << "First name :";
-    std::cin >> new_contact.first_name;
-    std::cout << "last name :";
-    std::cin >> new_contact.last_name;
-    std::cout << "nick name :";
-    std::cin >> new_contact.nick_name;
-    std::cout << "darkest secret :";
-    std::cin >> new_contact.darkest_secret;
-    std::cout << "phone number :";
-    std::cin >> new_contact.phone_number;
-    pb.addContact(new_contact);
 
-}
 
 int main()
 {
     PhoneBook pb;
     std::string cmd;
-    // std::string str = "1234567890";
-    // std::cout << "|";
-    // std::cout << str.substr(0, 9) << "\n";
-    // std::cout << str.length() << "\n";
-    // std::cout << "|";
     while (true)
     {
-        std::cout << "enter a command:";
-        std::getline(std::cin, cmd);
-        if (cmd == "a")
-            get_contact(pb);
-        else if (cmd == "s")
+        std:: cout << "\033[1;31mYou have just three commands 'ADD' 'SEARCH' 'EXIT'" << "\n";
+		std:: cout << "please enter one of these commands : \033[0m";
+        std::cin >> cmd;
+        std::cin.clear();
+        std::cin.ignore(9999, '\n');
+        if (cmd == "ADD")
+            pb.addContact();
+        else if (cmd == "SEARCH")
             pb.searchContact();
-        else if (cmd == "e")
+        else if (cmd == "EXIT")
             break;
     }
 }
