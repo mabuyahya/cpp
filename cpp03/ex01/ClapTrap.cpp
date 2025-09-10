@@ -49,7 +49,7 @@ void ClapTrap::attack(const std::string& target){
     }
     else
     {
-        std::cout << "ClapTrap " << name << " can't attack no energyPoints or hitpoints\n";
+        std::cout << name << " can't attack no energyPoints or hitpoints\n";
     }
 }
 
@@ -63,12 +63,12 @@ void ClapTrap::takeDamage(unsigned int amount){
     }
     else
     {
-        std::cout << "ClapTrap " << name << " can't take damage hitpoints is 0\n";
+        std::cout << name << " can't take damage hitpoints is 0\n";
     }
 }
 
 void ClapTrap::beRepaired(unsigned int amount){
-    if (energyPoints != 0)
+    if (energyPoints != 0 && hitPoints != 0)
     {
         energyPoints--;
         hitPoints += amount;
@@ -76,7 +76,7 @@ void ClapTrap::beRepaired(unsigned int amount){
     }
     else
     {
-        std::cout << "ClapTrap " << name << " can't beRepaired no energyPoints";
+        std::cout << name << " can't beRepaired no energyPoints";
     }
 }
 
