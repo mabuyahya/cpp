@@ -1,13 +1,13 @@
 #include "Fixed.hpp"
 
 Fixed::Fixed() {
-    _value = 0;
     std::cout << "Default constructor called\n";
+    _value = 0;
 }
 
 Fixed::Fixed(const Fixed& other) {
-    this->_value = other._value;
     std::cout << "Copy constructor called\n";
+    this->_value = other._value;
 }
 
 Fixed& Fixed::operator=(const Fixed& other) {
