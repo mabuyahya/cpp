@@ -6,7 +6,7 @@ Dog::Dog(){
     brain = new Brain;
 }
 
-Dog::Dog(const Dog& other){
+Dog::Dog(const Dog& other):brain(0){
     std :: cout  << "copy constructor form Dog class \n";
     *this = other;
 }

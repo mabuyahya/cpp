@@ -1,5 +1,5 @@
-#ifndef ICE_HPP 
-#define ICE_HPP 
+#ifndef CURE_HPP 
+#define CURE_HPP
 
 #include "AMateria.hpp"
 #include <iostream>
@@ -10,16 +10,9 @@ class Cure: public AMateria{
         Cure(const Cure & src);
         Cure & operator=(const Cure & rhs);
         ~Cure();
-        Cure(std::string type);
         AMateria* clone() const;
         void use(ICharacter& target);
         const std::string & getType() const;
 };
-
-
-
-
-
-
 
 #endif

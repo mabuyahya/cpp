@@ -6,7 +6,7 @@ Cat::Cat(){
     brain = new Brain;
 }
 
-Cat::Cat(const Animal& other){
+Cat::Cat(const Animal& other): brain(0){
     std :: cout  << "copy constructor form Cat class \n";
     *this = other;
 }

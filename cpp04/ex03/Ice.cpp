@@ -1,4 +1,5 @@
 #include "Ice.hpp"
+#include "ICharacter.hpp"
 
 Ice::Ice()
 : AMateria("ice"){
@@ -18,9 +19,7 @@ Ice::~Ice(){
 }
 
 void Ice::use(ICharacter& target){
-    (void) target;
-    std::cout << "ice\n";
-    // std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
+    std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
 }
 
 AMateria* Ice::clone() const {

@@ -1,8 +1,8 @@
 #ifndef ICE_HPP
 #define ICE_HPP
 
-#include "AMateria.hpp"
 #include <iostream>
+#include "AMateria.hpp"
 
 class Ice: public AMateria{
     public:
@@ -14,6 +14,6 @@ class Ice: public AMateria{
         AMateria* clone() const;
         void use(ICharacter& target);
         const std::string & getType() const;
-};
 
-#endif
+};
+#endif 

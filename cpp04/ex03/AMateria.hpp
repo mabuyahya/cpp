@@ -12,11 +12,11 @@ class AMateria{
         AMateria(std::string const & type);
         const std::string & getType() const;
         virtual AMateria* clone() const = 0;
-        virtual void use(ICharacter& target);
+        virtual void use(ICharacter & target);
+        virtual ~AMateria();
+        AMateria(const AMateria  & src);
+        AMateria & operator=(const AMateria  & obj);
 };
 
-AMateria::AMateria(std::string const & type){
-    this->type = type;
-}
 
 #endif 
