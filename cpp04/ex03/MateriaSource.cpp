@@ -1,4 +1,5 @@
 #include "MateriaSource.hpp"
+#include <iostream>
 
 MateriaSource::MateriaSource(){
     for (int i = 0; i < 4; i++)

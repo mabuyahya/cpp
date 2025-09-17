@@ -6,12 +6,13 @@ Cure::Cure()
 }
 
 Cure::Cure(const Cure & src)
-: AMateria("cure"){
-    (void) src;
+: AMateria(src) {
 }
 
-Cure & Cure::operator=(const Cure  & rhs) {
-    (void) rhs;
+Cure & Cure::operator=(const Cure & rhs) {
+    if (this != &rhs) {
+        AMateria::operator=(rhs);
+    }
     return (*this);
 }
 

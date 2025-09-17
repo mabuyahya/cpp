@@ -6,12 +6,13 @@ Ice::Ice()
 }
 
 Ice::Ice(const Ice & src)
-: AMateria("ice"){
-    (void)src;
+: AMateria(src) {
 }
 
-Ice & Ice::operator=(const Ice  & rhs) {
-    (void) rhs;
+Ice & Ice::operator=(const Ice & rhs) {
+    if (this != &rhs) {
+        AMateria::operator=(rhs);
+    }
     return (*this);
 }
 

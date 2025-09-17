@@ -10,7 +10,6 @@ class Ice: public AMateria{
         Ice(const Ice & src);
         Ice & operator=(const Ice & rhs);
         ~Ice();
-        Ice(std::string type);
         AMateria* clone() const;
         void use(ICharacter& target);
         const std::string & getType() const;

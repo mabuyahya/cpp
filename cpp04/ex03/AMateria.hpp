@@ -14,6 +14,7 @@ class AMateria{
         virtual AMateria* clone() const = 0;
         virtual void use(ICharacter & target);
         virtual ~AMateria();
+        AMateria();
         AMateria(const AMateria  & src);
         AMateria & operator=(const AMateria  & obj);
 };

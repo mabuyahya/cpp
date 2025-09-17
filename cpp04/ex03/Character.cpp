@@ -1,4 +1,5 @@
 #include "Character.hpp"
+#include <iostream>
 
 std::string const & Character::getName() const {
     return this->name;

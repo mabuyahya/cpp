@@ -7,8 +7,10 @@ AMateria::AMateria(std::string const & type){
 AMateria::~AMateria(){
 }
 
-AMateria::AMateria(const AMateria  & src) {
-    *this = src;
+AMateria::AMateria() : type("unknown") {
+}
+
+AMateria::AMateria(const AMateria & src) : type(src.type) {
 }
 
 AMateria & AMateria::operator=(const AMateria  & obj) {
