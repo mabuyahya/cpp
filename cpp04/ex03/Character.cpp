@@ -9,6 +9,7 @@ void Character::unequip(int idx) {
     if (idx < 0 || idx >= 4)
     {
         std::cout << "out of range\n";
+    return;
     }
     inventory[idx] = 0;
 }

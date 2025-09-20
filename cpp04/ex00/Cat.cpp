@@ -5,12 +5,12 @@ Cat::Cat(){
     type = "Cat";
 }
 
-Cat::Cat(const Animal& other){
-    std :: cout  << "copy constructor form Cat class \n";
+Cat::Cat(const Cat& other){
+    std::cout  << "copy constructor form Cat class \n";
     *this = other;
 }
 
-Cat Cat::operator=(const Cat&other) {
+Cat& Cat::operator=(const Cat& other) {
     std::cout << " copy assiment operator form Cat class \n";
     if (this != &other)
     {

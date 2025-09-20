@@ -6,11 +6,11 @@ Animal::Animal(){
 }
 
 Animal::Animal(const Animal& other){
-    std :: cout  << "copy constructor form Animal class \n";
+    std::cout << "copy constructor form Animal class \n";
     *this = other;
 }
 
-Animal Animal::operator=(const Animal&other) {
+Animal& Animal::operator=(const Animal& other) {
     std::cout << " copy assiment operator form Animal class \n";
     if (this != &other)
     {

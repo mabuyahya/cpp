@@ -8,7 +8,8 @@ Dog::Dog(){
 
 Dog::Dog(const Dog& other){
     std :: cout  << "copy constructor form Dog class \n";
-    *this = other;
+    type = other.type;
+    brain = new Brain(*other.brain);
 }
 
 Dog& Dog::operator=(const Dog&other) {

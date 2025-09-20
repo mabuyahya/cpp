@@ -1,5 +1,5 @@
-#ifndef ICHARACTE_HPP
-#define ICHARACTE_HPP
+#ifndef ICHARACTER_HPP
+#define ICHARACTER_HPP
 
 #include <iostream>
 

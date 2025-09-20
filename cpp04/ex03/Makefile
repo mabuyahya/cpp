@@ -2,7 +2,7 @@ NAME  = ./materia
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98  -MMD -MP
 
-SRC = main.cpp AMateria.cpp Ice.cpp Cure.cpp Character.cpp MateriaSource.cpp main.cpp AMateria.cpp Cure.cpp Ice.cpp  Character.cpp  MateriaSource.cpp
+SRC = main.cpp AMateria.cpp Ice.cpp Cure.cpp Character.cpp MateriaSource.cpp
 OBJ = $(SRC:.cpp=.o)
 OBJ_DIR = obj
 OBJ := $(addprefix $(OBJ_DIR)/, $(OBJ))

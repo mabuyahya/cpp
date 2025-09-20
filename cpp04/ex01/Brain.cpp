@@ -11,7 +11,7 @@ Brain::Brain(const Brain& other){
     *this = other;
 }
 
-Brain Brain::operator=(const Brain& other) {
+Brain& Brain::operator=(const Brain& other) {
     std::cout << " copy assiment operator form Brain class \n";
     if (this != &other)
     {

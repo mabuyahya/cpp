@@ -6,12 +6,12 @@ Cat::Cat(){
     brain = new Brain;
 }
 
-Cat::Cat(const Animal& other): brain(0){
+Cat::Cat(const Cat& other): brain(0){
     std :: cout  << "copy constructor form Cat class \n";
     *this = other;
 }
 
-Cat& Cat::operator=(const Cat&other) {
+Cat& Cat::operator=(const Cat& other) {
     std::cout << " copy assiment operator form Cat class \n";
     if (this != &other)
     {
