@@ -3,21 +3,25 @@
 Form::Form()
 : name(""), gradeToSign(75), gradeToExecute(75) {
     isSigned = false;
+    checkGrade();
 }
 
 Form::Form(const std::string& name, int signGrade, int execGrade)
 : name(name), gradeToSign(signGrade), gradeToExecute(execGrade) {
     isSigned = false;
+    checkGrade();
 }
 
 Form::Form(const Form& other)
 :name(other.name), isSigned(other.isSigned), gradeToSign(other.gradeToSign), gradeToExecute(other.gradeToExecute){
+    checkGrade();
 }
 
 Form& Form::operator=(const Form& other){
     if (this != &other)
     {
         isSigned = other.isSigned;
+        checkGrade();
     }
     return(*this);
 }
@@ -60,4 +64,11 @@ int Form::getSignGrade() const {
 
 int Form::getExecGrade() const {
     return gradeToExecute;
+}
+
+void Form::checkGrade(){
+    if (gradeToSign < 1 || gradeToSign < 1)
+      throw Bureaucrat::GradeTooLowException();
+    if (gradeToExecute > 150 || gradeToSign > 150 )
+       throw Bureaucrat::GradeTooHighException();
 }
