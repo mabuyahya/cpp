@@ -53,3 +53,20 @@ Bureaucrat::Bureaucrat(const std::string& name, const int grade):name(name),grad
 {
     checkGrade();
 }
+
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& f){
+    os << f.getName() << ", bureaucrat grade "<< f.getGrade();
+    return(os);
+}
+
+void Bureaucrat::signForm(Form & f){
+    try{
+        f.beSigned(*this);
+        std::cout << this->name << " signs " << f.getName() << "\n";
+
+    }
+    catch(std::exception & e){
+        std::cout << this->name << " couldn't sign " << f.getName()
+                  << " because " << e.what() << "\n";
+    }
+}

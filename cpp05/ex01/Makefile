@@ -3,7 +3,7 @@ CXX = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 OBJ_DIR = obj
-SRC = main.cpp Bureaucrat.cpp
+SRC = main.cpp Bureaucrat.cpp Form.cpp
 OBJ = $(SRC:%.cpp=%.o)
 OBJ := $(addprefix $(OBJ_DIR)/, $(OBJ))
 

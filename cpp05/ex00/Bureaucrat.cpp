@@ -53,3 +53,7 @@ Bureaucrat::Bureaucrat(const std::string& name, const int grade):name(name),grad
 {
     checkGrade();
 }
+
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& f){
+    os << f.getName() << ", bureaucrat grade "<< f.getGrade();
+}
