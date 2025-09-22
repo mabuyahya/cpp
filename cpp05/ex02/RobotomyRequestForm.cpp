@@ -30,7 +30,7 @@ RobotomyRequestForm::RobotomyRequestForm(const std::string &target): AForm("Robo
 void RobotomyRequestForm::execute(Bureaucrat const & executor) const {
     checkGrade(executor);
     std::cout << "Attempting robotomy...\a" << std::endl;
-	std::cout << "\a";
+    std::srand(time(NULL));
     if (!(std::rand() % 2))
         std::cerr << "Robotomy failed." << std::endl;
     else
