@@ -1,23 +1,30 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
-#include <iostream>
+#include "AForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
-int main() {
-    Bureaucrat bob("Bob", 75);
-    Bureaucrat alice("Alice", 5);
+    int main() {
+        Bureaucrat alice("Alice", 5);
+        Bureaucrat bob("Bob", 75);
+        Bureaucrat jone("jone", 144);
 
-    Form f1("Form 451", 80, 90);  // Bob can sign it
-    Form f2("Form 999", 50, 60);  // Only Alice can sign it
+        AForm* shrub = new ShrubberyCreationForm("home");
+        AForm* robot = new RobotomyRequestForm("Bender");
+        AForm* pardon = new PresidentialPardonForm("Ford");
+        jone.signForm(*shrub);  
+        bob.signForm(*robot);  
+        alice.signForm(*pardon); 
 
-    std::cout << f1 << "\n";
-    std::cout << f2 << "\n";
+        std::cout << "--------------------------------------\n";
 
-    bob.signForm(f1);  // Success
-    bob.signForm(f2);  // Fail: grade too low
-    alice.signForm(f2); // Success
+        jone.executeForm(*shrub);  
+        bob.executeForm(*robot); 
+        alice.executeForm(*pardon);
 
-    std::cout << f1 << "\n";
-    std::cout << f2 << "\n";
+        delete shrub;
+        delete robot;
+        delete pardon;
 
-    return 0;
-}
+        return 0;
+    }
