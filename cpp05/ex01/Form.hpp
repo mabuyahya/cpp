@@ -15,7 +15,7 @@ class Form{
         const int gradeToSign;
         const int gradeToExecute;
     private:
-        void Form::checkGrade();
+        void checkGrade();
 
     public:
         Form();
