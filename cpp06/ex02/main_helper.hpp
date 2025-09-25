@@ -5,6 +5,7 @@
 #include "B.hpp"
 #include "A.hpp"
 #include "C.hpp"
+#include <cstdlib>
 
 Base * generate(void);
 void identify(Base* p);

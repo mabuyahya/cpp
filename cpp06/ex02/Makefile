@@ -1,8 +1,8 @@
 NAME = ./convert
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = main.cpp Base.cpp
+SRC = main.cpp Base.cpp main_helper.cpp
 OBJ = $(SRC:.cpp=.o)
 OBJDIR = obj
 OBJ := $(addprefix $(OBJDIR)/, $(OBJ))
