@@ -6,124 +6,188 @@ ScalarConverter::~ScalarConverter(){}
 ScalarConverter::ScalarConverter(ScalarConverter const & tt){(void ) tt;}
 ScalarConverter& ScalarConverter::operator=(ScalarConverter const & tt){(void) tt; return (*this);}
 
+bool isAllDigit(char kinds[], int len){
+    int i = 0;
 
-int ScalarConverter::checkIfMix(const std::string & str){
-    int flag[] = {0, 0};
+    if (kinds[0] == SIGN && len != 1)
+        i++;
+    while (i < len)
+    {
+        if (kinds[i] != NUM)
+            return false;
+        i++;
+    }
+    return true;
+}
+
+bool isDouble(char kinds[], int len){
+    int dotCont = 0;
+    for (int i = 0; i < len; i++){
+        if (kinds[i] == DOT){
+            dotCont++;
+            continue ;
+        }
+        if (kinds[i] != NUM)
+            return (false);
+    }
+    if (dotCont != 1)
+        return (false);
+    return (true);
+}
+
+bool isFloat(char kinds[], int len){
+    int dotCont = 0;
+    for (int i = 0; i < len - 1; i++){
+        if (kinds[i] == DOT){
+            dotCont++;
+            continue ;
+        }
+        if (kinds[i] != NUM && (kinds[i] != F && i != len - 1))
+            return (false);
+    }
+    if (dotCont != 1)
+        return (false);
+    return (true);
+}
+
+bool isOneChar(char kinds[], int len){
+    if ((kinds[0] == ELSE || kinds[0] == DOT || kinds[0] == F) && len == 1)
+        return true;
+    return false;
+}
+
+Type whichType(const std::string & str){
+    char kinds[str.length()];
     for (size_t i = 0; i < str.length(); i++)
     {
-        if (std::isdigit(str[i]))
-            flag[0] = 1;
-        if (std::isalpha(str[i]) && str[i] != 'f')
-            flag[1] = 1;
+        if (str[i] == 'f') kinds[i] = F;
+        else if (isdigit(str[i])) kinds[i] = NUM;
+        else if (str[i] == '.') kinds[i] = DOT;
+        else if (str[i] == '+' || str[i] == '-') kinds[i] = SIGN;
+        else kinds[i] = ELSE;
     }
-    if (flag[0] && flag[1])
-        return(1);
-    return (0);
-    
+    if (isOneChar(kinds, str.length()))
+        return CHAR;
+    else
+    if (isAllDigit(kinds, str.length()))
+        return INT;
+    if (isDouble(kinds, str.length()))
+        return DOUBLE;
+    if (isFloat(kinds, str.length()))
+        return FLOAT;
+    if (str == "nan" || str == "+inf" || str == "-inf" || str == "nanf" || str == "+inff" || str == "-inff")
+        return SPECIAL;
+    return NONE;
 }
 
-void ScalarConverter::toChar(const std::string & str){
-   std::cout << "char: ";
-   if (str.length() == 1 && !std::isdigit(str[0])){
-        char c = str[0];
-        if (c >= 32 && c <= 126){
-            std::cout << "'" << c << "'" << std::endl;
-        }
-        else{
-            std::cout << "Non displayable \n";
-        }
-        return ;
+void charPath(const std::string & str){
+    char c = str[0];
+    std::cout << "char: '" << c << "'\n";
+    std::cout << "int: " << static_cast<int>(c) << "\n";
+    std::cout << "float: " << static_cast<float>(c) << ".0f" << "\n";
+    std::cout << "double: " << static_cast<double>(c) << ".0" << "\n";
+}
+
+void intPath(const std::string & str){
+    int n = std::atoi(str.c_str());
+    if ( n < 0 || n > 127)
+        std::cout << "char: impossible\n";
+    else if (n < 32 || n > 126)
+        std::cout << "char: Non displayable\n";
+    else
+        std::cout << "char: '" << static_cast<char>(n) << "'\n";
+    std::cout << "int: " << n << "\n";
+    std::cout << "float: " << static_cast<float>(n) << ".0f" << "\n";
+    std::cout << "double: " << static_cast<double>(n) << ".0" << "\n";
+}
+
+void floatPath(const std::string & str){
+    std::cout << std::fixed << std::setprecision(1);
+    float f = std::atof(str.c_str());
+    if (f  != static_cast<int>(f))
+        std::cout << "char: impossible\n";
+    else if (f < 0 || f > 127)
+        std::cout << "char: impossible\n";
+    else if (f < 32 || f > 126)
+        std::cout << "char: Non displayable\n";
+    else
+        std::cout << "char: '" << static_cast<char>(f) << "'\n";
+    std::cout << "int: " << static_cast<int>(f) << "\n";
+    std::cout << "float: " << f << "f\n";
+    std::cout << "double: " << static_cast<double>(f) << "\n";
+}
+
+void doublePath(const std::string & str){
+    std::cout << std::fixed << std::setprecision(1);
+    double d = strtod(str.c_str(), NULL);
+    if (d  != static_cast<int>(d))
+        std::cout << "char: impossible\n";
+    else if (d < 0 || d > 127)
+        std::cout << "char: impossible\n";
+    else if (d < 32 || d > 126)
+        std::cout << "char: Non displayable\n";
+    else
+        std::cout << "char: '" << static_cast<char>(d) << "'\n";
+    std::cout << "int: " << static_cast<int>(d) << "\n";
+    std::cout << "float: " << static_cast<float>(d) << "f\n";
+    std::cout << "double: " << d << "\n";
+}
+
+void specialPath(const std::string & str){
+    if (str == "nan" || str == "nanf"){
+        std::cout << "char: impossible\n";
+        std::cout << "int: impossible\n";
+        std::cout << "float: nanf\n";
+        std::cout << "double: nan\n";
     }
-    try
-    {
-        if (checkIfMix(str)){
-            std::cout << "impossible\n";
-            return ;
-        }
-        double d = std::stod(str);
-         if (d != d || d == std::numeric_limits<double>::infinity() ||
-            d == -std::numeric_limits<double>::infinity()) {
-            std::cout << "impossible\n";
-            return;
-        }
-        if (d < 0 || d > 127){
-            std::cout << "impossible\n";
-            return ;
-        }
-        char c = static_cast<char>(d); 
-        if (c >= 32 && c <= 126){
-            std::cout << "'" << c << "'" << std::endl;
-        }
-        else
-        {
-            std::cout << "Non displayable\n";
-        }
+    else if (str == "+inf" || str == "+inff"){
+        std::cout << "char: impossible\n";
+        std::cout << "int: impossible\n";
+        std::cout << "float: +inff\n";
+        std::cout << "double: +inf\n";
     }
-    catch(...)
-    {
-        std::cout << "impossible\n";
-        return ;
+    else if (str == "-inf" || str == "-inff"){
+        std::cout << "char: impossible\n";
+        std::cout << "int: impossible\n";
+        std::cout << "float: -inff\n";
+        std::cout << "double: -inf\n";
     }
 }
 
-void ScalarConverter::toInt(const std::string & str){
-    std::cout << "int: ";
-    try {
-        double d = std::stod(str);
-        if (d != d || d == std::numeric_limits<double>::infinity() ||
-            d == -std::numeric_limits<double>::infinity()) {
-            std::cout << "impossible\n";
-            return;
-        }
-        if (d < INT_MIN || d > INT_MAX) {
-            std::cout << "impossible\n";
-            return;
-        }
-        int i = static_cast<int>(d);
-        std::cout << i << "\n";
-    } catch (...) {
-        std::cout << "impossible\n";
-    }
+void nonePath(const std::string & str){
+    (void) str;
+    std::cout << "char: impossible\n";
+    std::cout << "int: impossible\n";
+    std::cout << "float: impossible\n";
+    std::cout << "double: impossible\n";
 }
 
-void ScalarConverter::toFloat(const std::string & str){
-    std::cout << "float: ";
-    try {
-        double f = std::stof(str);
-        if (f != f){
-            std::cout << "nanf\n";
-        } else if (f == std::numeric_limits<float>::infinity()){
-            std::cout <<  "+inff\n";
-        } else if (f == -std::numeric_limits<float>::infinity()){
-            std::cout <<  "-inff\n";
-        } else {
-            std::cout << std::fixed << std::setprecision(1) << f << "f"<< std::endl;
-        }
-    } catch (...) {
-        std::cout << "impossible\n";
-    }
-}
-
-void ScalarConverter::toDouble(const std::string & str){
-    std::cout << "double: ";
-    try {
-        double d = std::stod(str);
-        if (d != d){
-            std::cout << "nan\n";
-        } else if (d == std::numeric_limits<double>::infinity()){
-            std::cout <<  "+inf\n";
-        } else if (d == -std::numeric_limits<double>::infinity()){
-            std::cout <<  "-inf\n";
-        } else {
-            std::cout << std::fixed << std::setprecision(1) << d << std::endl;
-        }
-    } catch (...) {
-        std::cout << "impossible\n";
-    }
-}
 void    ScalarConverter::convert(const std::string & str){
-    toChar(str);
-    toInt(str);
-    toFloat(str);
-    toDouble(str);
+    Type type = whichType(str);
+
+    switch (type)
+    {
+        case CHAR:
+            std::cout << "CHAR\n";
+            charPath(str);
+            break;
+        case INT:
+            std::cout << "INT\n";
+            intPath(str);
+            break;
+        case FLOAT:
+            std::cout << "FLOAT\n";
+            floatPath(str);
+            break;
+        case DOUBLE:
+            std::cout << "DOUBLE\n";
+            doublePath(str);
+            break;
+        case SPECIAL:
+            specialPath(str);
+            break;
+        case NONE:
+            nonePath(str);
+            break;
+    }
 }

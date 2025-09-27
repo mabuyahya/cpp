@@ -4,15 +4,31 @@
 #include <string>
 #include <iostream>
 
-#include <limits>
-#include <cmath>
+//is digit
+#include <cctype>
 
-#include <sstream>
+// atoi
 #include <cstdlib>
+// setprecision
 #include <iomanip>
 
-#include <climits>
-#include <cctype>
+enum Type{
+    CHAR,
+    INT,
+    FLOAT,
+    DOUBLE,
+    SPECIAL,
+    NONE
+};
+
+enum Kind{
+    NUM,
+    DOT,
+    F,
+    ELSE,
+    SIGN,
+};
+
 class ScalarConverter{
     private:
     ScalarConverter();
