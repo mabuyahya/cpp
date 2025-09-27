@@ -2,6 +2,7 @@
 #define SERIALIZER_HPP
 
 #include  <string>
+#include  <stdint.h>
 #include  <iostream>
 
 struct Data
