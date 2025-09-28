@@ -1,26 +1,22 @@
 #include "iter.hpp"
 
-
-void print(const int &num)
+void print(const int &i)
 {
-        std::cout << num;
+    std::cout << i << std::endl;
 }
 
-
-void increment(int &num)
+void addOne(int &n)
 {
-    num++;
+    n += 1;
 }
 
 int main()
 {
-    int arr[5] = {1, 2, 3, 4, 5};
-    std::cout << "Int Array Before Increment : ";
-    ::iter(arr, 5, print);
-    std::cout << "\n";
-    std::cout << "Int Array After Increment : ";
-    ::iter(arr, 5, increment);
-    ::iter(arr, 5, print);
-    std::cout << "\n";
+    int arr[] = {1, 2, 3, 4, 5};
+
+    iter(arr, 5, print);
+    std::cout << std::endl;
+    iter(arr, 5, addOne);
+    iter(arr, 5, print);
     return (0);
 }
