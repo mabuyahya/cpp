@@ -32,30 +32,21 @@ void Span::addNumber(int num){
 int Span::longestSpan(){
     if (myArr.size() <= 1)
         throw Span::canNotFindSpan();
-    return(getLargest() - getSmallest(0, 1));
+    std::vector<int> temp = myArr;
+    std::sort(temp.begin(), temp.end());
+    return(temp.at(temp.size() - 1) - temp.front());
 }
 
 int Span::shortestSpan(){
     if (myArr.size() <= 1)
         throw Span::canNotFindSpan();
-    int temp = getSmallest(0, 1);
-    return (getSmallest(temp, 0) - temp);
-}
-
-int Span::getLargest(){
-    int largest = myArr.front();
-    for (std::vector<int>::iterator it = myArr.begin(); it != myArr.end(); it++){
-        if (*it > largest)
-            largest = *it;
-    }
-    return (largest);
-}
-
-int Span::getSmallest(int num, int flag){
-    int smallest = myArr.front();
-    for (std::vector<int>::iterator it = myArr.begin(); it != myArr.end(); it++){
-        if (*it < smallest && (*it != num || flag))
-            smallest = *it;
+    std::vector<int> temp = myArr;
+    std::sort(temp.begin(), temp.end());
+    int smallest = temp.at(1) - temp.front();
+    for (size_t i = 1; i < temp.size(); i++)
+    {
+        if (temp.at(i) - temp.at(i - 1) < smallest)
+            smallest = temp.at(i) - temp.at(i - 1);
     }
     return (smallest);
 }

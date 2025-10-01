@@ -32,9 +32,6 @@ class Span{
             public:
                 const char *what() const throw();
         };
-    private:
-        int getLargest();
-        int getSmallest(int, int);
 };
 
 
