@@ -1,8 +1,8 @@
 #ifndef MUTANTSTACK_HPP 
 #define MUTANTSTACK_HPP 
 
-#include <vector>
 #include <stack>
+#include <deque>
 
 
 template <typename T>

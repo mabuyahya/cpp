@@ -34,7 +34,4 @@ class Span{
         };
 };
 
-
-
-
 #endif
