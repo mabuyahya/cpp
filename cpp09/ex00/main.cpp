@@ -1,8 +1,6 @@
 #include "BitcoinExchange.hpp"
 
 int main(){
-    BitcoinExchange main("data2.csv");
-    std::cout << "======================================================\n";
+    BitcoinExchange main("data.csv");
     main.parseFile("file.txt");
-
 }
