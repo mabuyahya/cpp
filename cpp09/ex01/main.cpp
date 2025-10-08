@@ -2,7 +2,7 @@
 
 int main(int c, char **s){
     if (c != 2){
-        std::cout << "on args\n";
+        std::cout << "wrong args\n";
         return (1);
     }
     RPN test;

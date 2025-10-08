@@ -146,7 +146,7 @@ void    BitcoinExchange::validateData(int mode){
     if (!checkHeader(line, del, first, secend))
     {
         std::cout << "Error: bad header => " << line << std::endl;
-        std::exit(2);
+        throw std::runtime_error("Bad header");
     }
     i = end + 1;
     while (i < data.size())
@@ -161,7 +161,7 @@ void    BitcoinExchange::validateData(int mode){
         if (errorKind != 1 && mode == DATABASE_MODE)
         {
             std::cout << "Error: bad input " << line << std::endl;
-            std::exit(3);
+            throw std::runtime_error("Bad database input");
         }
         else if (mode == FILEDATA_MODE)
         {
@@ -197,7 +197,8 @@ void    BitcoinExchange::readData(std::string fileName, int mode){
     std::ifstream    file(fileName.c_str());
     if (!file || !file.is_open()){
         std::cout << "Error: could not open file. : " << fileName << std::endl;
-        std::exit(1);
+        file.close();
+        throw std::runtime_error("could not open file.");
     }
     std::ostringstream dataBaseStream;
     dataBaseStream << file.rdbuf();
