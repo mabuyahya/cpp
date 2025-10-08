@@ -4,9 +4,12 @@ void RPN::parseRNP(std::string str){
     int i = 0;
     while (str[i])
     {
-        while (str[i] == ' '){
+        while (str[i] && str[i] == ' ')
             i++;
-        }
+
+        if (!str[i])
+            break;
+
         if (std::isdigit(str[i]))
         {
             stack.push(str[i] - '0');

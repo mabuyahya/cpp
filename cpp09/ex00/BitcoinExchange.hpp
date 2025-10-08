@@ -7,6 +7,7 @@
 #include <sstream>
 #include <cstdlib>
 #include <map>
+#include <stdexcept>
 
 enum Mode{
     DATABASE_MODE,
