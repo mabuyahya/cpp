@@ -16,7 +16,7 @@ void RPN::parseRNP(std::string str){
         }
         else if (str[i] == '*' || str[i] == '/' || str[i] == '-' || str[i] == '+')
         {
-            if (stack.size() == 2)
+            if (stack.size() >= 2)
             {
                 int first = stack.top();
                 stack.pop();
