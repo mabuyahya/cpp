@@ -55,6 +55,34 @@ void PmergeMe::parseAndValidatInput(int argc, char **argv){
     }
 }
 
+void PmergeMe::sortVector(std::vector<int> &vector){
+    std::vector<int> smalles;
+    std::vector<int> larges;
+
+    for (int i = 0; i + 1 < vector.size(); i += 2){
+        int a = vector[i];
+        int b = vector[i + 1];
+
+        if (a > b){
+            larges.push_back(a);
+            smalles.push_back(b);
+        }
+        else {
+            larges.push_back(b);
+            smalles.push_back(a);
+        }
+    }
+    if (vector.size() % 2 != 0){
+        smalles.push_back(vector.back());
+    }
+    sortVector(larges);
+
+    for (size_t i = 0; i < smalles.size(); i++){
+        std::vector<int>::iterator it = std::lower_bound(larges.begin(), larges.end(), smalles[i]);
+        larges.insert(it, smalles[i]);
+    }
+    vector = larges;
+}
 
 void PmergeMe::sort(int argc, char **argv){
     parseAndValidatInput(argc, argv);
