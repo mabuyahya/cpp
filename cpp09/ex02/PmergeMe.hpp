@@ -27,8 +27,10 @@ class PmergeMe
         void parseAndValidatInput(int , char **);
         std::string trem(std::string str);
         bool validNumber(std::string str);
-        void sortVector(std::vector<int> &vector);
+        std::vector<int> sortVector(std::vector<int> &vector);
 };
+
+typedef std::vector<std::pair<int, int> > PairVector;
 
 
 #endif
