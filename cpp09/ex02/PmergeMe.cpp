@@ -75,7 +75,6 @@ void extendJacobNumbers(std::vector<int> &jacobsthalNumbers, int pendingSize) {
     size_t i = 0;
     int val;
 
-    // Step 1: use the Jacobsthal numbers to fill extendedJacobsthalNumbers
     while (i < jacobsthalNumbers.size()) {
         val = jacobsthalNumbers[i];
         while (val > 0 && val <= pendingSize) {
@@ -86,7 +85,6 @@ void extendJacobNumbers(std::vector<int> &jacobsthalNumbers, int pendingSize) {
         i++;
     }
 
-    // Step 2: fill in any missing indices from pendingSize down to 1
     int j = pendingSize;
     while (j > 0) {
         if (std::find(extendedJacobsthalNumbers.begin(), extendedJacobsthalNumbers.end(), j) == extendedJacobsthalNumbers.end())
@@ -94,25 +92,56 @@ void extendJacobNumbers(std::vector<int> &jacobsthalNumbers, int pendingSize) {
         j--;
     }
 
-    // Step 3: replace original vector
     jacobsthalNumbers = extendedJacobsthalNumbers;
 }
 
+int binarySearch(std::vector<int> main, int pend, int high){
+    if (main.empty())
+        return (0);
+    int low = 0;
+    if (high >= static_cast<int>(main.size()))
+        high = main.size() - 1;
 
-  std::vector<int> getJacobNumbers(int pendingSize) {
+    while (low <= high){
+        int mid = (high + low) / 2;
+        if (main[mid] == pend){
+            return (mid);
+        }
+        else if (main[mid] > pend) {
+            high = mid - 1;
+        } else {
+            low = mid + 1;
+        }
+    if (low < static_cast<int>(main.size()) && pend < main[low])
+        return (low);
+    }
+    return (main.size());
+
+}
+
+void sorting(std::vector<int> &main, std::vector<int> pend, std::vector<int> jacob) {
+    std::vector<int>::iterator it = jacob.begin();
+    int high = 3;   
+    main.insert(main.begin(), pend[0]);
+    while (it != jacob.end()){
+        if (it != jacob.begin() && *it > *(it - 1))
+            high = high * 2 + 1;
+        if (*it <= static_cast<int>(pend.size()) && *it != 1){
+            int i = binarySearch(main, pend[*it - 1], high - 1);
+            if (i != -1) {
+                main.insert(main.begin() + i, pend[*it - 1]);
+            }
+        }
+        it++;
+    }
+}
+
+std::vector<int> getJacobNumbers(int pendingSize) {
     std::vector<int> jacobsthalNumbers;
 
     for (int i = 3; generateJacob(i) <= pendingSize; i++) {
         jacobsthalNumbers.push_back(generateJacob(i));
     }
-
-    std::cout << "Initial jacobsthal numbers:";
-    for (size_t i = 0; i < jacobsthalNumbers.size(); i++)
-    {
-        std::cout << jacobsthalNumbers[i] << " ";
-    }
-    std::cout << "\n";
-
     extendJacobNumbers(jacobsthalNumbers, pendingSize);
     return (jacobsthalNumbers);
 }
@@ -159,7 +188,7 @@ std::vector<int> PmergeMe::sortVector(std::vector<int> &vector){
     if (isOdd) {
         pend.push_back(oddElement);
     }
-    sortedMain = main;//sortVector(main);
+    sortedMain = sortVector(main);
 
     sortedPend.resize(sortedMain.size());
     for (size_t i = 0; i < sortedMain.size(); i++) {
@@ -174,18 +203,7 @@ std::vector<int> PmergeMe::sortVector(std::vector<int> &vector){
         sortedPend.push_back(oddElement);
     }
     std::vector<int> jacobsthalNumbers = getJacobNumbers(sortedPend.size());
-    std::cout << "pend :";
-    for (size_t i = 0; i < pend.size(); i++)
-    {
-        std::cout << pend[i] << " ";
-    }
-    std::cout << "\n";
-    std::cout << "jacob :";
-    for (size_t i = 0; i < jacobsthalNumbers.size(); i++)
-    {
-        std::cout << jacobsthalNumbers[i] << " ";
-    }
-    std::cout << "\n";
+    sorting(sortedMain, sortedPend, jacobsthalNumbers);
     return (sortedMain);
 }
 
@@ -194,4 +212,8 @@ std::vector<int> PmergeMe::sortVector(std::vector<int> &vector){
 void PmergeMe::sort(int argc, char **argv){
     parseAndValidatInput(argc, argv);
     std::vector<int> sorted = sortVector(vector);
+    for (size_t i = 0; i < sorted.size(); i++)
+    {
+        std::cout << sorted[i] << " ";
+    }
 }
