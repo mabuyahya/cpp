@@ -14,5 +14,4 @@ int main(int c, char **v){
         std::cout << e.what() << std::endl;
     }
     return (0);
-    return (0);
 }
