@@ -18,11 +18,11 @@ void RPN::parseRNP(std::string str){
         {
             if (stack.size() >= 2)
             {
-                int first = stack.top();
+                double first = stack.top();
                 stack.pop();
-                int second = stack.top();
+                double second = stack.top();
                 stack.pop();
-                int result = 0;
+                double result = 0;
                 switch (str[i]) {
                     case '+': 
                         result = second + first;
@@ -34,20 +34,22 @@ void RPN::parseRNP(std::string str){
                         result = second * first;
                         break;
                     case '/': 
-                        result = (first == 0 ? 0 : second / first);
+                        if (first == 0)
+                            throw std::runtime_error("Error: division by zero");
+                        result = second / first;
                         break;
                 }
                 stack.push(result);
             }
             else
             {
-                std::cerr << "error\n";
+                std::cerr << "Error\n";
                 return ;
             }
         }
         else
         {
-            std::cerr << "error\n";
+            std::cerr << "Error\n";
             return ;
         }
         i++;
@@ -58,7 +60,7 @@ void RPN::parseRNP(std::string str){
 
     }
     else 
-        std::cerr << "error\n";
+        std::cerr << "Error\n";
 
 }
 

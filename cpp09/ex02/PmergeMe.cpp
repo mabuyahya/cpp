@@ -8,13 +8,19 @@ PmergeMe::PmergeMe(){
 }
 PmergeMe::PmergeMe(int c, char **v){
     parseAndValidatInput(c, v);
+    parseAndValidatInputDeque(c, v);
 }
 PmergeMe & PmergeMe::operator=(const PmergeMe & tt){
-    (void) tt;
+    if (this != &tt)
+    {
+        vector = tt.vector;
+        deque = tt.deque;
+    }
     return (*this);
 }
 PmergeMe::PmergeMe(const PmergeMe & tt){
-    (void) tt;
+    vector = tt.vector;
+    deque = tt.deque;
 }
 PmergeMe::~PmergeMe(){
 }

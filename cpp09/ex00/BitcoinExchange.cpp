@@ -76,6 +76,13 @@ int BitcoinExchange::validDate(std::string date){
     int dayI = std::atoi(day.c_str());
     if (yearI < 0 || yearI > 2025 || monthI < 1 || monthI > 12 || dayI < 1 || dayI > 31)
         return (0);
+    
+    int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    if (monthI == 2 && ((yearI % 4 == 0 && yearI % 100 != 0) || (yearI % 400 == 0)))
+        daysInMonth[1] = 29;
+    if (dayI > daysInMonth[monthI - 1])
+        return (0);
+    
     return (1);
 }
 
@@ -179,7 +186,11 @@ void    BitcoinExchange::validateData(int mode){
             }
             else if (errorKind == 1){
                 std::map<std::string, float>::const_iterator it = dataBaseMap.lower_bound(fileDate);
-                if (it->first == fileDate || it == dataBaseMap.begin())
+                if (it != dataBaseMap.end() && it->first == fileDate)
+                {
+                    std::cout << fileDate << " => " << fileValue << " = " << fileValue * it->second << std::endl;
+                }
+                else if (it == dataBaseMap.begin())
                 {
                     std::cout << fileDate << " => " << fileValue << " = " << fileValue * it->second << std::endl;
                 }

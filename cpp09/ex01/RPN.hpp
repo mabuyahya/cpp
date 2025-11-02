@@ -4,11 +4,12 @@
 #include <string>
 #include <iostream>
 #include <stack>
+#include <stdexcept>
 
 class RPN
 {
     private:
-        std::stack<int> stack; 
+        std::stack<double> stack; 
 
     public:
         RPN();
