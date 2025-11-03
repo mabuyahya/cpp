@@ -2,7 +2,7 @@
 
 int main(int c, char **s){
     if (c != 2){
-        std::cout << "Error: could not open file.\n";
+        std::cout << "usage: ./btc <filename>\n";
         return (1);
     }
     try {
