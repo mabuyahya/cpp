@@ -7,8 +7,8 @@ int main(int c, char **v){
         std::cerr << "no args\n";
         return (0);
     }
-    PmergeMe sort; 
     try{
+        PmergeMe sort; 
         sort.sort(c, v);
     } catch(std::exception & e){
         std::cout << e.what() << std::endl;

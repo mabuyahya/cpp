@@ -109,22 +109,21 @@ int PmergeMe::binarySearch(std::vector<int> main, int pend, int high){
     int low = 0;
     if (high >= static_cast<int>(main.size()))
         high = main.size() - 1;
+    if (high < low)
+        return (low);
 
     while (low <= high){
-        int mid = (high + low) / 2;
+        int mid = low + (high - low) / 2;
         if (main[mid] == pend){
-            return (mid);
+            low = mid + 1;
         }
         else if (main[mid] > pend) {
             high = mid - 1;
         } else {
             low = mid + 1;
         }
-    if (low < static_cast<int>(main.size()) && pend < main[low])
-        return (low);
     }
-    return (main.size());
-
+    return (low);
 }
 
 void PmergeMe::sorting(std::vector<int> &main, std::vector<int> pend, std::vector<int> jacob) {
@@ -198,11 +197,13 @@ std::vector<int> PmergeMe::sortVector(std::vector<int> &vector){
     }
     sortedMain = sortVector(main);
 
+    std::vector<bool> mainUsed(main.size(), false);
     sortedPend.resize(sortedMain.size());
     for (size_t i = 0; i < sortedMain.size(); i++) {
         for (size_t j = 0; j < main.size(); j++){
-            if (main[j] == sortedMain[i]){
+            if (main[j] == sortedMain[i] && !mainUsed[j]){
                 sortedPend[i] = pend[j];
+                mainUsed[j] = true;
                 break;
             }
         }
@@ -278,23 +279,23 @@ int PmergeMe::binarySearch(std::deque<int> main, int pend, int high){
     int low = 0;
     if (high >= static_cast<int>(main.size()))
         high = main.size() - 1;
+    if (high < low)
+        return (low);
 
     while (low <= high){
-        int mid = (high + low) / 2;
+        int mid = low + (high - low) / 2;
         if (main[mid] == pend){
-            return (mid);
+            low = mid + 1;
         }
         else if (main[mid] > pend) {
             high = mid - 1;
         } else {
             low = mid + 1;
         }
-    if (low < static_cast<int>(main.size()) && pend < main[low])
-        return (low);
     }
-    return (main.size());
-
+    return (low);
 }
+
 
 void PmergeMe::sorting(std::deque<int> &main, std::deque<int> pend, std::deque<int> jacob) {
     std::deque<int>::iterator it = jacob.begin();
@@ -355,11 +356,13 @@ std::deque<int> PmergeMe::sortDeque(std::deque<int> &deque){
     }
     sortedMain = sortDeque(main);
 
+    std::deque<bool> mainUsed(main.size(), false);
     sortedPend.resize(sortedMain.size());
     for (size_t i = 0; i < sortedMain.size(); i++) {
         for (size_t j = 0; j < main.size(); j++){
-            if (main[j] == sortedMain[i]){
+            if (main[j] == sortedMain[i] && !mainUsed[j]){
                 sortedPend[i] = pend[j];
+                mainUsed[j] = true;
                 break;
             }
         }
