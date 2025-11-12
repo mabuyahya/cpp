@@ -45,6 +45,12 @@ but in c++ we there are a better and easier and different way for that and to un
 2. **what is cin**: cin is just an object from the istream class in this class there a variables(the fd for the standard input) and functions that do things like reading from that fd also there are a layer for changing the sequence of characters to the input type so it can be stored in that type.
 3. **what is << and >>?**: the operator<<>> is a function that exists in c++ and when i do this cout << "Hello"; it is the same as calling the function operator<<(cout, "Hello"); so this function takes the object(cout) and the value("Hello") and does the output operation.
 
+### references in c++
+each variable in c++ has an address in the memory and a value stored in that address and a name that we use to access that variable.
+refrerences are just an alias for a variable, when you create a reference you are creating a new name for an existing variable.
+but is the refrerences when we pass them as arguments to functions are they passed by value or by reference?
+the answer is that references are always passed by reference, when you pass a reference to a function you are passing the address of the variable that the reference is referring to.
+in other words the reference is just a new name for the variable and when you pass the reference to a function you are passing the address of the variable. (just like pointers but without the need to use the * and & operators for simplicity).
 ### while, for loop, if statements are the same as c language
 
 ### functions in c++ are same as c language but with some differences
@@ -259,3 +265,19 @@ you need iterators because they provide a way to access the elements of a contai
 what the iterators really is that they are just class templates that provide functions to access the elements of a container. each container has its own iterator class that is defined in the STL library.
 for example the vector container has a vector::iterator class that provides functions to access the elements of the vector.
 so if i want to make a algorithm that works with vectors and trees at the same time i can just use iterators to access the elements of the containers without knowing the underlying structure of the containers. because the tree stores its elements in a different way than the vector but both containers provide iterators to access their elements so i didn't need to worry about who to move between the elements because the iterators will take care of that for me.
+
+### strings in c++
+"hello world" -> this is a string literal, string literals are stored in a read-only section of memory (not in the stack or heap) along with other literals like numbers and characters. 
+in c when i do this array[] = "aaa"; the compiler creates an array of characters in the stack and copies the string literal to that array and returns the address of the first character of the array.
+this is in c and c++ but in c++ we have a better way to handle strings using the string class that is defined in the STL library.
+the string class provides a way to store and manipulate strings in a more convenient way than using character arrays.
+the string class provides functions to concatenate, compare, and manipulate strings.
+in c++ when i do this string str = "hello world";
+the compiler creates an object of the string class in the stack and call the constructor of the string class that takes a string literal as an argument and initializes the object with the string literal.
+the string class also handles the memory management for the string so you don't need to worry about allocating and deallocating memory for the string.
+
+### arrays in c++
+arrays in c are just a collection of elements of the same data type that are stored in contiguous memory locations. when the compiler sees an array declaration it allocates a block of memory in the stack for the array elements, and the name of the array is just a pointer to the first element of the array.
+and when you do int arr[5]; the compiler allocates a block of memory in the stack for 5 integers and the name arr is just a pointer to the first element of the array, arr[0] = 30; what really happening is that the compiler translates this code to *(arr + 0) = 30; so arr is just a pointer to the first element of the array and we can use pointer arithmetic to access the elements of 
+in the end arrays are just pointers to the first element of the array.
+arrays in c and c++ are the same but in c++ we have a better way to handle arrays using the vector class that is defined in the STL library.
