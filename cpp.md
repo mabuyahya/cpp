@@ -281,3 +281,16 @@ arrays in c are just a collection of elements of the same data type that are sto
 and when you do int arr[5]; the compiler allocates a block of memory in the stack for 5 integers and the name arr is just a pointer to the first element of the array, arr[0] = 30; what really happening is that the compiler translates this code to *(arr + 0) = 30; so arr is just a pointer to the first element of the array and we can use pointer arithmetic to access the elements of 
 in the end arrays are just pointers to the first element of the array.
 arrays in c and c++ are the same but in c++ we have a better way to handle arrays using the vector class that is defined in the STL library.
+
+### access specifiers in c++
+access specifiers are keywords that are used to define the access level of class members (data members and member functions). in other words which functions can see and access and call these members. there are three access specifiers in c++: public, private, and protected.
+* **public**: members declared as public are accessible from anywhere in the program. they can be accessed by any function or class.
+* **private**: members declared as private are only accessible from within the class, only the class member functions can access these members.
+* **protected**: members declared as protected are accessible from within the class and by derived class (subclass) objects. the class functions and the derived class member functions can access these members.
+the compiler controls all these access levels at compile time and will give an error if you try to access a member that is not accessible from the current context.
+
+### static keyword in c++
+the static keyword in c++ has different meanings based on the context in which it is used:
+1. **Static Variables**: when a variable is declared as static inside a function, it retains its value between function calls. the variable is initialized only once and its value persists throughout the program execution. (the variable is stored in the data segment of the memory instead of the stack)
+2. **Static Class Members**: when a class member (data member or member function) is declared as static, it belongs to the class itself rather than to any specific object of the class. static members are shared among all objects of the class and can be accessed using the class name without creating an object. if the data member is static it is stored in the data segment not with the object in the heap.(just like global variables but with class scope). static functions work like the normal functions (they didn't take the this pointer as an invisible argument) but with class scope, static functions can only access static data members and other static member functions of the class.
+3. **static functions in a file**: when a function is declared as static at the file level (outside of any class or function), it has internal linkage, meaning it can only be accessed within the same translation unit (source file). this prevents name conflicts with functions in other files.
