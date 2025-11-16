@@ -167,14 +167,17 @@ int main() {
 ```
 here we have a base class named Base with a virtual function show and a derived class named Derived that overrides the show function. in the main function we create a base class pointer basePtr and a derived class object derivedObj. we assign the address of the derivedObj to the basePtr and then call the show function on the basePtr. because the show function is virtual the compiler uses the vptr to get the vtable and then uses the vtable to get the address of the show function of the derived class and then calls the function. so the output is "Derived class show function called".
 
-### abstract classes and pure virtual functions
-an abstract class is a class that cannot be instantiated. an abstract class is created by declaring at least one pure virtual function in the class. a pure virtual function is a virtual function that has no implementation and is declared by assigning 0 to the function declaration.
-and we use abstract classes to define interfaces for derived classes. so any class that derives from an abstract class must implement all the pure virtual functions of the abstract class.
+### abstract classes and interfaces in c++
+in c++ comes the concept of abstract classes when we want to define a class that will be used as a base class for other classes but we don't want to create objects from it, and you want a certain function in this class to be implemented by derived classes(must be overridden).
+if you make a class with at least one pure virtual function this class will be an abstract class. and this abstract class cannot be instantiated and the pure virtual functions must be implemented by derived classes. and the other functions in the abstract class can have implementations, and the derived classes use these implementations if they want.
 and we use the abstract classes to achieve polymorphism.
 ```cpp
 class AbstractClass {
     public:
         virtual void pureVirtualFunction() = 0; // Pure virtual function
+        void normalFunction() {
+            cout << "Normal function in abstract class" << endl;
+        }
 };
 class DerivedClass : public AbstractClass {
     public:
@@ -188,10 +191,40 @@ int main() {
     DerivedClass derivedObj;
     obj = &derivedObj;
     obj->pureVirtualFunction(); // Output: Derived class implementation of pure virtual function
+    obj->normalFunction(); // Output: Normal function in abstract class
     return 0;
 }
 ```
-here we have an abstract class named AbstractClass with a pure virtual function pureVirtualFunction. we use a derived class to implement the pure virtual function and then we can call the function using a base class pointer.
+we have a AbstractClass class with a pure virtual function pureVirtualFunction and a normal function normalFunction. this class cannot be instantiated because it is an abstract class. and in the derived class DerivedClass we have to implement the pure virtual function. when we create a derived class object and assign its address to a base class pointer we can call the pure virtual function and the normal function.
+
+an interface is a class that has only pure virtual functions and no data members. which means that the use of this class is not for inheritance of data members or function implementations but only for defining a contract that the derived classes must implement.
+```cpp
+class Interface {
+    public:
+        virtual void function1() = 0;
+        virtual void function2() = 0;
+};
+class Implementation : public Interface {
+    public:
+        void function1() {
+            cout << "Implementation of function1" << endl;
+        }
+        void function2() {
+            cout << "Implementation of function2" << endl;
+        }
+};
+int main() {
+    Interface* obj;
+    Implementation implObj;
+    obj = &implObj;
+    obj->function1(); // Output: Implementation of function1
+    obj->function2(); // Output: Implementation of function2
+    return 0;
+}
+```
+here we have an interface class Interface with two pure virtual functions function1 and function2. in the derived class Implementation we have to implement both functions. when we create an implementation object and assign its address to an interface pointer we can call both functions. 
+the whole idea of a abstract classes is for no instantiation and if a function is pure virtual it must be overridden in the derived class.
+the whole idea of an interface is to define a class that the only purpose is to force the derived classes to implement certain functions.
 
 ### exceptions in c++
 exceptions are a way to handle errors and exceptional situations in a program. in c++ we use the try, catch, and throw keywords to handle exceptions.
